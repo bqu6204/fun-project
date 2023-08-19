@@ -1,43 +1,31 @@
 import { useState, useEffect } from "react";
 import { ChangeEvent } from "react";
+import { useDebounce } from "@/hooks/useDebounce";
 import styleSheet from "@/styles/dist/q1-content.module.css";
 import q1Validator from "@/_utils/q1-validator";
 import q1Calculator from "@/_utils/q1-calculator";
 
 const Q1Content: React.FC = () => {
   const [input, setInput] = useState<string>("");
-  const [inputForCal, setInputForCal] = useState<string>("");
   const [output, setOutput] = useState<string>("");
+  const [result, refreshDelay] = useDebounce(() => {
+    // validate input
+    const validation = q1Validator(input);
+    if (validation !== "OK") {
+      setError(validation);
+      setOutput("");
+    } else {
+      setError("");
+      setOutput(q1Calculator(input));
+    }
+  }, 200);
   const [error, setError] = useState<string>("");
-  const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout | null>(
-    null
-  );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInput(value);
-
-    // Update the input for calculation after the delay
-    if (currentTimeout) clearTimeout(currentTimeout);
-
-    const newTimeout = setTimeout(() => setInputForCal(value), 200); // Delay time in milliseconds
-    setCurrentTimeout(newTimeout);
+    refreshDelay();
   };
-
-  useEffect(() => {
-    // Perform the calculation when the input for calculation changes
-    if (currentTimeout) {
-      // validate input
-      const validation = q1Validator(inputForCal);
-      if (validation !== "OK") {
-        setError(validation);
-        setOutput("");
-      } else {
-        setError("");
-        setOutput(q1Calculator(inputForCal));
-      }
-    }
-  }, [inputForCal]);
 
   return (
     <div className="w-4/6 m-auto">
