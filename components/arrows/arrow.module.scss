@@ -1,0 +1,34 @@
+$ARROW_SIZE:4px;
+
+.box{
+    width: 20px;
+    position:relative;
+    display: inline-block;
+
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0px $ARROW_SIZE $ARROW_SIZE 0;
+    display: inline-block;
+    user-select: none;
+
+    padding: $ARROW_SIZE;
+    
+  }
+  
+  .right {
+    transform: rotate(-45deg);
+  }
+  
+  .left {
+    transform: rotate(135deg);
+  }
+  
+  .up {
+    transform: rotate(-135deg);
+  }
+  
+  .down {
+    transform: rotate(45deg);
+  }

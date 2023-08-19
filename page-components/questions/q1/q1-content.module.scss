@@ -1,0 +1,19 @@
+.error{
+    --tw-ring-color: red !important;
+
+    &:not(:focus){
+        outline: 1px solid red !important;
+    }
+}
+
+.input{
+    transition: all 0.4s ease;
+}
+
+.errorBox{
+    display: block;
+    height: 1rem;
+    .errorMessage{
+        color: red !important;
+    }
+}

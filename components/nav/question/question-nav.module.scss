@@ -1,0 +1,18 @@
+.link{
+    position:relative;
+    width: fit-content;
+
+    &:hover > *{
+        @keyframes bounce {
+            0% {right:0px}
+            24% {right:10px}
+            100% {right: 0px;}
+        }
+        animation: bounce 0.8s linear infinite;
+    }
+}
+
+.text{
+    position:relative;
+    display: inline-block;
+}

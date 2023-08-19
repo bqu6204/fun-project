@@ -1,0 +1,14 @@
+{
+    "liveSassCompile.settings.formats": [{
+        "format": "expanded",
+        "extensionName": ".css",
+        "savePath": "/styles/dist"
+    }],
+    "liveSassCompile.settings.excludeList": [
+        "/**/node_modules/**",
+        "/**/.vscode/**",
+        "/**/.next/"
+    ],
+    "liveSassCompile.settings.generateMap": false,
+    "css.lint.unknownAtRules": "ignore",
+}
