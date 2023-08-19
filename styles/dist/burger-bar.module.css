@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  padding: 10px;
+}
+
+.container:hover .line {
+  width: 150%;
+  height: 2px;
+}
+
+.box {
+  position: relative;
+  margin: auto;
+  height: 15px;
+  width: 15px;
+}
+
+.line:hover .line {
+  width: 100%;
+}
+
+.line {
+  position: absolute;
+  left: 50%;
+  height: 2.5px;
+  width: 20px;
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 50px;
+  transform: translate(-50%, -50%);
+  transform-origin: 0 0;
+  transition: top 0.2s linear 0.2s, width 0.2s linear, height 0.2s linear, transform 0.2s linear;
+}
+
+.line1 {
+  top: 0%;
+}
+
+.line2 {
+  top: 50%;
+}
+
+.line3 {
+  top: 100%;
+}
+
+.isActivate {
+  transition: top 0.2s linear, width 0.2s linear, height 0.2s linear, transform 0.2s linear 0.2s;
+  height: 2px;
+  top: 50%;
+  width: 140%;
+}
+.isActivate.line1 {
+  transform: rotate(45deg) translate(-50%, -50%);
+}
+.isActivate.line2 {
+  width: 0% !important;
+}
+.isActivate.line3 {
+  transform: rotate(-45deg) translate(-50%, -50%);
+}

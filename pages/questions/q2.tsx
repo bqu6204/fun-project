@@ -6,7 +6,7 @@ import Q2Content from "@/page-components/questions/q2/q2-content";
 const Q2: NextPageWithLayout = () => {
   return (
     <main>
-      <div className="flex flex-col space-y-3">
+      <div className="flex flex-col space-y-3 ">
         <QuestionInfo title="Question 2" discription="抽抽樂，歡迎來抽獎！" />
         <Q2Content />
       </div>

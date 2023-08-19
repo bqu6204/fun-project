@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.container.isSelf {
+  flex-direction: row-reverse;
+}

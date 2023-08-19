@@ -1,0 +1,17 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:10px 20px;
+    z-index: 5;
+    box-shadow: 1px 1px 20px 1px rgba(0, 0, 0, 0.2);    background-color: rgb(245, 245, 245);
+
+}
+
+.photo{
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    &:hover{
+        transform: scale(1.1)
+    }
+}

@@ -1,0 +1,42 @@
+
+
+.container{
+    position:relative; 
+    border-radius: 5px 5px 5px 0px;
+    padding: 10px 10px ;
+    flex-grow: 1;
+    min-width: 0; 
+    overflow-wrap: break-word;
+    background-color: rgb(250, 250, 250);
+    box-shadow: -15px 13px 13px -9px rgba(0,0,0,0.1);
+
+    &.isSelf{
+        border-radius: 5px 5px 0px 5px;
+        box-shadow: 15px 13px 13px -9px rgba(0,0,0,0.1);
+
+    }
+
+    &::before{
+        content:'';
+        position: absolute;
+      
+        display: block;
+        bottom: 0px;
+        width: 15px;
+        height: 10px;
+        background-color: inherit;
+
+
+
+    }
+    &::before{
+        right: 100%;
+        clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+    }
+
+    &.isSelf::before{
+       left: 100%;
+       clip-path: polygon(0 0, 0% 100%, 100% 100%);
+
+    }
+}

@@ -2,6 +2,9 @@
   position: relative;
   width: -moz-fit-content;
   width: fit-content;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .link:hover > * {
   animation: bounce 0.8s linear infinite;

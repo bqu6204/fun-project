@@ -2,12 +2,14 @@ import styleSheet from "@/styles/dist/spinning-wheel.module.css";
 
 interface IWheel {
   prizes: { title: string; percentage: number; backgroundColor: string }[];
+  rotateDegree: number;
+  spinDurationMs: number;
 }
 
-const Wheel: React.FC<IWheel> = ({ prizes }) => {
+const Wheel: React.FC<IWheel> = ({ prizes, rotateDegree, spinDurationMs }) => {
   const prizeCount = prizes.length;
   const prizeDegree = 360 / prizeCount;
-  const clipPercentage = calculateClipPercentage(prizeCount) - 1;
+  const clipPercentage = calculateClipPercentage(prizeCount) - 0.5;
 
   function calculateClipPercentage(N: number): number {
     if (N <= 4) return 100;
@@ -22,7 +24,13 @@ const Wheel: React.FC<IWheel> = ({ prizes }) => {
   }
 
   return (
-    <div className={styleSheet.wheel}>
+    <div
+      className={styleSheet.wheel}
+      style={{
+        transform: `rotate(${rotateDegree}deg)`,
+        transition: `transform ${spinDurationMs}ms ease`,
+      }}
+    >
       {prizes.map(({ backgroundColor, title }, idx) => {
         return (
           <div

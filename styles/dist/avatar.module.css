@@ -1,0 +1,10 @@
+.imageBox {
+  border: 1px solid black;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  padding: 8px;
+  border-radius: 50%;
+  margin-top: auto;
+}

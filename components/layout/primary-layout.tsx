@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import HomeNav from "@/components/nav/home/home-nav";
-import QuestionNav from "@/components/nav/question/question-nav";
+import HomeNav from "@/components/header/home/home-nav";
+import QuestionNav from "@/components/header/question/question-nav";
 import Footer from "@/components//footer/footer";
 
 interface IPrimaryLayout {

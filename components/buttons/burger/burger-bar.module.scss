@@ -1,0 +1,74 @@
+$TOPNAV_COLOR: #000;
+
+
+.container {
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+    user-select: none;
+    padding: 10px;
+
+  }
+  
+  .container:hover .line {
+    width: 150%;
+    height: 2px;
+  }
+  
+  .box {
+    position: relative;
+    margin: auto;
+    height: 15px;
+    width: 15px;
+
+  }
+  
+  .line:hover .line {
+    width: 100%;
+  }
+  
+  .line {
+    position: absolute;
+    left: 50%;
+    height: 2.5px;
+    width: 20px;
+    background-color: $TOPNAV_COLOR;
+    border: 1px solid $TOPNAV_COLOR;
+    border-radius: 50px;
+    transform: translate(-50%, -50%);
+    transform-origin: 0 0;
+    transition: top 0.2s linear 0.2s, width 0.2s linear, height 0.2s linear, transform 0.2s linear;
+  }
+  
+  .line1 {
+    top: 0%;
+  }
+  
+  .line2 {
+    top: 50%;
+  }
+  
+  .line3 {
+    top: 100%;
+  }
+  
+  .isActivate {
+    transition: top 0.2s linear, width 0.2s linear, height 0.2s linear, transform 0.2s linear 0.2s;
+    height: 2px;
+    top: 50%;
+    width: 140%;
+  
+    &.line1 {
+      transform: rotate(45deg) translate(-50%, -50%);
+    }
+  
+    &.line2 {
+      width: 0% !important;
+    }
+  
+    &.line3 {
+      transform: rotate(-45deg) translate(-50%, -50%);
+    }
+  }
+  

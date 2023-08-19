@@ -8,6 +8,8 @@ import q1Calculator from "@/_utils/q1-calculator";
 const Q1Content: React.FC = () => {
   const [input, setInput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
   const [result, refreshDelay] = useDebounce(() => {
     // validate input
     const validation = q1Validator(input);
@@ -19,7 +21,6 @@ const Q1Content: React.FC = () => {
       setOutput(q1Calculator(input));
     }
   }, 200);
-  const [error, setError] = useState<string>("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
