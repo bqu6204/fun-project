@@ -1,26 +1,30 @@
 import styleSheet from "@/styles/dist/section3-message-input.module.css";
 import PlusButton from "@/components/buttons/plus/plus-button";
 
-import { ChangeEvent, useRef, useState } from "react";
+import NeumorphismTextArea from "@/components/inputs/textarea/neumorphism-textarea";
+import { useContext } from "react";
+import { ChatContext } from "../chatroom-store";
+import { EMessageAction } from "../chatroom-store";
 
 const Section3MessageInput: React.FC = () => {
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-
-  const handleChange = () => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "auto"; // Reset the height first
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-    }
-  };
+  const chatroomInfo = useContext(ChatContext);
 
   return (
     <div className={styleSheet.container}>
-      <textarea
-        ref={textareaRef}
-        className={styleSheet.inputText}
-        onChange={handleChange}
+      <NeumorphismTextArea
+        className={styleSheet.textInput}
+        onSubmit={(text) => {
+          chatroomInfo.setMessageList({
+            type: EMessageAction.SENDTEXT,
+            payload: {
+              userId: chatroomInfo.currentUserId,
+              avatarSrc: chatroomInfo.currentUserAvatarSrc,
+              text,
+            },
+          });
+        }}
       />
-      <PlusButton />
+      <PlusButton className={styleSheet.plus} />
     </div>
   );
 };

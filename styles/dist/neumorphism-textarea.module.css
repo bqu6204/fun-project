@@ -1,0 +1,33 @@
+.container {
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  width: 100%;
+  background-color: white;
+  padding: 10px 20px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  gap: 10px;
+}
+
+.textarea {
+  resize: none;
+  width: 100%;
+  margin-bottom: 0px;
+  height: 1.5rem;
+}
+.textarea:focus {
+  border: none;
+  outline: none;
+}
+
+.imageBox {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  cursor: pointer;
+}
