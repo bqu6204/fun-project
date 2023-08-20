@@ -1,5 +1,6 @@
 import Chatroom from "@/components/chatroom/chatroom";
 import { TMessageList } from "@/components/chatroom/type";
+import Image from "next/image";
 
 const Q3Content: React.FC = () => {
   const messageList: TMessageList = [
@@ -56,9 +57,23 @@ const Q3Content: React.FC = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 w-11/12">
-      <div></div>
-      <div className="">
+    <div className="grid grid-cols-1 lg:grid-cols-2 m-auto gap-8">
+      <div
+        className={"relative "}
+        style={{ minWidth: "300px", minHeight: "300px" }}
+      >
+        <Image
+          src="/images/component-structure.png"
+          fill
+          alt="This demonstrates the component structure of the chatroom "
+          title="component-structure"
+          style={{ objectFit: "contain", objectPosition: "center" }}
+        />
+      </div>
+      <div className=" m-auto">
+        <h2 className="text-center text-2xl mb-4 font-bold">
+          Try the chatroom below !
+        </h2>
         <Chatroom
           messageList={messageList}
           currentUserId="user0"
