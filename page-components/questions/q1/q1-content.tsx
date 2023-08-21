@@ -10,7 +10,7 @@ const Q1Content: React.FC = () => {
   const [output, setOutput] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  const [result, refreshDelay] = useDebounce(() => {
+  const [result, isPending, refreshDelay] = useDebounce(() => {
     // validate input
     const validation = q1Validator(input);
     if (validation !== "OK") {

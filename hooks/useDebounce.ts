@@ -3,17 +3,17 @@ import { useState, useEffect } from "react";
 function useDebounce<R>(
   callback: () => R,
   delayMs: number
-): [R | null, () => void] {
+): [R | null, boolean, () => void] {
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout | null>(
     null
   );
 
   const [shouldUpdate, setShouldUpdate] = useState<boolean>(false);
   const [result, setResult] = useState<R | null>(null);
-  const [istriggered, setIstriggered] = useState<boolean>(false);
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   function refreshDelay() {
-    if (!istriggered) setIstriggered(true);
+    if (!isPending) setIsPending(true);
 
     if (currentTimeout) clearTimeout(currentTimeout);
     const newTimeout = setTimeout(
@@ -24,13 +24,14 @@ function useDebounce<R>(
   }
 
   useEffect(() => {
-    if (!istriggered) return;
+    if (!isPending) return;
 
     const result = callback();
     if (result) setResult(result);
+    setIsPending(false);
   }, [shouldUpdate]);
 
-  return [result, refreshDelay];
+  return [result, isPending, refreshDelay];
 }
 
 export { useDebounce };

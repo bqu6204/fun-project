@@ -41,9 +41,10 @@ const YoubikeSelect: React.FC<IYoubikeSelect> = ({
         </div>
         {isDropdownOpen && (
           <ul className={styleSheet.ul} ref={dropdownRef}>
-            {options.map((option) => {
+            {options.map((option, idx) => {
               return (
                 <li
+                  key={idx}
                   className={`${styleSheet.option} ${
                     currentValue === option ? styleSheet.isSelected : ""
                   }`}

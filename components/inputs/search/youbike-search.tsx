@@ -17,12 +17,13 @@ const YoubikeSearch: React.FC<IYoubikeSearch> = ({
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [relatedTerms, setRelatedTerms] = useState<string[]>([]);
-  const [result, refreshDelay] = useDebounce(() => {
+  const [result, isPending, refreshDelay] = useDebounce(() => {
     const temp = searchTerms.filter((item) => item.includes(currentValue));
     setRelatedTerms(temp);
   }, 300);
 
-  const handleSelect = (term: string) => {
+  const handleSelect = (e: React.MouseEvent, term: string) => {
+    e.preventDefault();
     onChange(term);
     refreshDelay();
     setIsDropdownOpen(false);
@@ -32,13 +33,6 @@ const YoubikeSearch: React.FC<IYoubikeSearch> = ({
     setIsDropdownOpen(true);
     refreshDelay();
     onChange(e.target.value);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      setIsDropdownOpen(false);
-    }
   };
 
   return (
@@ -51,13 +45,14 @@ const YoubikeSearch: React.FC<IYoubikeSearch> = ({
           type="search"
           placeholder="搜尋站點"
           value={currentValue}
-          onKeyDown={handleKeyPress}
           onClick={(e) => {
             e.stopPropagation();
             setIsDropdownOpen(true);
           }}
           onBlur={(e) => {
-            e.stopPropagation();
+            /// e.stopPropagation();
+            e.preventDefault();
+            console.log("onblur");
             setIsDropdownOpen(false);
           }}
           onChange={(e) => handleChange(e)}
@@ -65,23 +60,29 @@ const YoubikeSearch: React.FC<IYoubikeSearch> = ({
 
         {isDropdownOpen && (
           <ul className={styleSheet.ul}>
-            {relatedTerms.length !== 0 ? (
-              relatedTerms.map((term) => {
-                return (
-                  <li
-                    className={styleSheet.relatedTerm}
-                    onClick={() => handleSelect(term)}
-                  >
-                    {term}
-                  </li>
-                );
-              })
+            {isPending ? (
+              <li className={`${styleSheet.relatedTerm} ${styleSheet.isEmpty}`}>
+                正在查找相關資料......
+              </li>
+            ) : !currentValue ? (
+              <li className={`${styleSheet.relatedTerm} ${styleSheet.isEmpty}`}>
+                請輸入關鍵字。
+              </li>
+            ) : relatedTerms.length !== 0 ? (
+              relatedTerms.map((term, idx) => (
+                <li
+                  key={idx}
+                  className={styleSheet.relatedTerm}
+                  onMouseDown={(e) => handleSelect(e, term)}
+                >
+                  {term}
+                </li>
+              ))
             ) : (
               <li className={`${styleSheet.relatedTerm} ${styleSheet.isEmpty}`}>
-                查無相關結果。
+                查無 「{currentValue}」 相關結果。
               </li>
             )}
-            <li></li>
           </ul>
         )}
       </div>
