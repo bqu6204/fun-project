@@ -1,37 +1,74 @@
 import Image from "next/image";
 import styleSheet from "@/styles/dist/section1-filter.module.css";
-import YoubikeSelect from "@/components/inputs/select/youbike-select";
 import { useState } from "react";
+import { useYoubikeSelector, useYoubikeDispatch } from "@/hooks/useRedux";
+import {
+  selectCounty,
+  setSearch,
+  checkDistrict,
+  checkAllDistricts,
+} from "@/redux/youbike/youbike-filter-slice";
+
+import YoubikeSelect from "@/components/inputs/select/youbike-select";
 import YoubikeSearch from "@/components/inputs/search/youbike-search";
+import YoubikeCheckBox from "@/components/inputs/checkbox/youbike-checkbox";
+
+import taiwanCountyDistrcits from "@/public/data/taiwan-county-districts.json";
 
 const Section1Filter: React.FC = () => {
-  const counties = ["台北市", "新竹市"];
-  const [currentCounty, setCurrentCounty] = useState<string>("");
+  const counties = Object.keys(
+    taiwanCountyDistrcits
+  ) as (keyof typeof taiwanCountyDistrcits)[];
+
+  const { county, districts, search, searchTerms } = useYoubikeSelector(
+    (state) => state.youbikeFilter
+  );
+  const dispatch = useYoubikeDispatch();
 
   return (
-    <div className={"grid grid-cols-1 sm:grid-cols-2"}>
+    <div className={"grid grid-cols-1 md:grid-cols-2 gap-x-8"}>
       <div>
-        <h2 className={"light-green text-2xl font-medium tracking-[.25rem]"}>
+        <h2
+          className={"mt-8 light-green text-2xl font-medium tracking-[.25rem]"}
+        >
           站點資訊
         </h2>
-        <div className={"lg:flex gap-4"}>
+        <div className={"lg:flex gap-4 select-none"}>
           <YoubikeSelect
             className="mt-[10px]"
             options={counties}
-            currentValue={currentCounty}
-            onChange={(value) => setCurrentCounty(value)}
+            currentValue={county}
+            onChange={(value) => dispatch(selectCounty(value))}
           />
           <YoubikeSearch
             className="grow mt-[10px]"
-            currentValue={currentCounty}
-            onChange={(value) => setCurrentCounty(value)}
+            currentValue={search}
+            onChange={(value) => dispatch(setSearch(value))}
             searchTerms={counties}
           />
         </div>
+
+        <YoubikeCheckBox
+          className="my-6"
+          isChecked={districts.every((district) => district.isChecked)}
+          value="全部勾選"
+          onChange={(value) => dispatch(checkAllDistricts(value))}
+        />
+        <div className="grid grid-cols-3 lg:grid-cols-4 gap-y-6">
+          {districts.map((district) => {
+            return (
+              <YoubikeCheckBox
+                isChecked={district.isChecked}
+                value={district.name}
+                onChange={(value) => dispatch(checkDistrict(value))}
+              />
+            );
+          })}
+        </div>
       </div>
       <div
-        className="hidden lg:block relative"
-        style={{ width: "100px", height: "100px" }}
+        className="hidden md:block relative"
+        style={{ width: "100%", height: "100%" }}
       >
         <Image
           src="/images/ride-bicycle.png"
@@ -40,6 +77,7 @@ const Section1Filter: React.FC = () => {
           fill
           priority
           className="next-image-contain"
+          sizes="(max-width: 640px) 0px, (min-width: 640px) 50vw"
         />
       </div>
     </div>

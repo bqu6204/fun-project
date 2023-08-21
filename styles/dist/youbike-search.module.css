@@ -29,6 +29,10 @@
   font-weight: 300;
 }
 
+.input, .equalTerm {
+  color: rgb(181, 205, 34);
+}
+
 .ul {
   position: absolute;
   width: 100%;

@@ -18,8 +18,15 @@ const YoubikeSearch: React.FC<IYoubikeSearch> = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [relatedTerms, setRelatedTerms] = useState<string[]>([]);
   const [result, isPending, refreshDelay] = useDebounce(() => {
-    const temp = searchTerms.filter((item) => item.includes(currentValue));
-    setRelatedTerms(temp);
+    const equal: string[] = [];
+    const include = searchTerms.filter((item) => {
+      if (item === currentValue) {
+        equal.push(item);
+        return false;
+      } else return item.includes(currentValue);
+    });
+    const result = equal.concat(include);
+    setRelatedTerms(result);
   }, 300);
 
   const handleSelect = (e: React.MouseEvent, term: string) => {
@@ -49,30 +56,27 @@ const YoubikeSearch: React.FC<IYoubikeSearch> = ({
             e.stopPropagation();
             setIsDropdownOpen(true);
           }}
-          onBlur={(e) => {
-            /// e.stopPropagation();
-            e.preventDefault();
-            console.log("onblur");
-            setIsDropdownOpen(false);
-          }}
+          onBlur={(e) => setIsDropdownOpen(false)}
           onChange={(e) => handleChange(e)}
         />
 
         {isDropdownOpen && (
           <ul className={styleSheet.ul}>
-            {isPending ? (
-              <li className={`${styleSheet.relatedTerm} ${styleSheet.isEmpty}`}>
-                正在查找相關資料......
-              </li>
-            ) : !currentValue ? (
+            {!currentValue ? (
               <li className={`${styleSheet.relatedTerm} ${styleSheet.isEmpty}`}>
                 請輸入關鍵字。
+              </li>
+            ) : isPending ? (
+              <li className={`${styleSheet.relatedTerm} ${styleSheet.isEmpty}`}>
+                正在查找 「{currentValue}」 相關資料......
               </li>
             ) : relatedTerms.length !== 0 ? (
               relatedTerms.map((term, idx) => (
                 <li
                   key={idx}
-                  className={styleSheet.relatedTerm}
+                  className={`${styleSheet.relatedTerm} ${
+                    term === currentValue ? styleSheet.equalTerm : ""
+                  }`}
                   onMouseDown={(e) => handleSelect(e, term)}
                 >
                   {term}

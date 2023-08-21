@@ -5,9 +5,14 @@ $HEADER_RWD_HEIGHT: 90px;
 .header{
     background-color: white;
     border-bottom: 1px solid rgb(235, 235,235);
-    position: relative;
+
+
+
 }
 
+.menu{
+    z-index: 50;
+}
 
 @media screen and (min-width: var.$BREAKPOINT_1){
     .header{
@@ -61,6 +66,7 @@ $HEADER_RWD_HEIGHT: 90px;
 @media screen and (max-width: var.$BREAKPOINT_1){
     .header{
         height: $HEADER_RWD_HEIGHT;
+
     }
 
     .menu{
@@ -70,11 +76,11 @@ $HEADER_RWD_HEIGHT: 90px;
         justify-content: space-between;
         padding: 40px 60px;
         top:100%;
-        left:100%;
+        left:100vw;
         height: calc(100vh - $HEADER_RWD_HEIGHT);
         width: 100vw;
+        z-index: 50;
  
-        z-index: 100;
         background-color: var.$YOUBIKE_LIGHT_GREEN;
 
         transition: left 0.4s ease;

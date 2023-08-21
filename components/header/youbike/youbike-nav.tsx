@@ -20,9 +20,9 @@ const YoubikeNav: React.FC = () => {
   ];
 
   return (
-    <div className="sticky top-0 left-0">
-      <header className={`${styleSheet.header} relative`}>
-        <div className="h-full flex items-center  youbike-page">
+    <div className="sticky top-0 left-0 z-50">
+      <header className={`${styleSheet.header}`}>
+        <div className="h-full z-50 flex items-center relative youbike-page">
           <Link href="/" target="_blank">
             <h1>
               <Image
@@ -31,6 +31,7 @@ const YoubikeNav: React.FC = () => {
                 title="youbike logo"
                 height={90}
                 width={90}
+                priority={true}
               />
             </h1>
           </Link>

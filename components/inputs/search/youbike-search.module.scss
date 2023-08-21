@@ -26,11 +26,16 @@
     cursor:pointer;
     border-radius: 5px;
 
+
 }
 
 .input, .relatedTerm{
     padding: 10px 15px;
     font-weight: 300;
+}
+
+.input, .equalTerm{
+    color: var.$YOUBIKE_LIGHT_GREEN
 }
 
 .ul{

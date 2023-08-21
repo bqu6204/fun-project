@@ -1,0 +1,44 @@
+@charset "UTF-8";
+.label {
+  display: flex;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  width: -moz-fit-content;
+  width: fit-content;
+  align-items: center;
+}
+
+.input {
+  width: 0.1px;
+  height: 0.1px;
+}
+
+.value {
+  text-indent: 1rem;
+  font-weight: 300;
+}
+
+.checkmark {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 2px;
+  border: 1px solid rgb(174, 174, 174);
+  transition: background-color 0.1s linear;
+}
+.checkmark.isChecked {
+  background-color: rgb(181, 205, 34);
+  border-color: rgb(181, 205, 34);
+}
+.checkmark.isChecked::before {
+  content: "✓";
+  font-size: 16px;
+  font-weight: 700;
+  display: block;
+  line-height: 18px;
+  text-align: center;
+  color: white;
+}

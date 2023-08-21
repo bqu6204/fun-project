@@ -1,0 +1,48 @@
+@use "../../../styles/vars" as var;
+
+$HEIGHT: 20px;
+
+.label{
+    display:flex;
+    user-select: none;
+    cursor: pointer;
+    width: fit-content;
+    align-items: center;
+}
+
+.input{
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.value{
+    text-indent: 1rem;
+    font-weight: 300;
+}
+.checkmark{
+    display: block;
+    width: $HEIGHT;
+    height: $HEIGHT;
+    background-color: white;
+    border-radius: 2px;
+    border: 1px solid var.$YOUBIKE_DARK_GRAY;
+
+    transition: background-color 0.1s linear;
+
+
+    &.isChecked{
+        background-color: var.$YOUBIKE_LIGHT_GREEN;
+        border-color: var.$YOUBIKE_LIGHT_GREEN;
+        
+        &::before{
+            content: '\2713';
+            font-size: 16px;
+            font-weight: 700;
+            display: block;
+            line-height: 18px;
+            text-align: center;
+            color: white;
+        }
+    }
+}
+
