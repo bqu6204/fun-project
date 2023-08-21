@@ -1,0 +1,72 @@
+@use "../../../styles/vars" as var;
+.container{
+    min-width: 180px;
+    width: 100%;
+    position: relative;
+
+    @media screen and (max-width: var.$BREAKPOINT_2) {
+        width: 100%;
+    }
+
+    font-weight: 300;
+}
+
+.selected, .ul{
+    user-select: none;
+    background-color: var.$YOUBIKE_LIGHT_GRAY;
+    cursor:pointer;
+    border-radius: 5px;
+
+}
+
+.selected, .option{
+    padding: 10px 15px;
+}
+
+.selected{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    &::after{
+        content:'';
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid black;
+        transform: rotate(180deg);
+        transition: transform 0.2s ease;
+
+    }
+
+    &.isDropdownOpen::after{
+        transform: rotate(360deg);
+    }
+
+    &.isEmpty{
+        color: var.$YOUBIKE_DARK_GRAY;
+
+        &::after{
+            border-bottom:5px solid  var.$YOUBIKE_DARK_GRAY;
+        }
+    }
+}
+
+.ul{
+    position:absolute;
+    top: calc(100% + 10px);
+    width: 100%;
+    z-index: 1;
+}
+
+.option{
+    &.isSelected{
+        font-weight: 700;
+    }
+
+    &:hover{
+        background-color: rgb(240,240,240);
+    }
+}

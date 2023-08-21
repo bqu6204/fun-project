@@ -1,0 +1,41 @@
+@use "../../../styles/vars" as var;
+
+.container{
+    position: relative;
+}
+
+.input{
+    display: block;
+    width:100%;
+    
+    &:not(:hover):not(:focus),&.isEmpty{
+        background-image: url('/icons/search.svg');
+        background-position: 92%;
+        background-repeat: no-repeat;
+        background-size: 1rem;
+    }
+    
+
+    outline:none;
+    border:none;
+}
+
+.input, .ul{
+    background-color: var.$YOUBIKE_LIGHT_GRAY;
+    user-select: none;
+    cursor:pointer;
+    border-radius: 5px;
+
+}
+
+.input, .relatedTerm{
+    padding: 10px 15px;
+    font-weight: 300;
+}
+
+.ul{
+    position: absolute;
+    width: 100%;
+    top:calc( 100% + 10px);
+    z-index: 1;
+}

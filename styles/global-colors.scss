@@ -1,0 +1,33 @@
+@use './vars' as var;
+
+.light-green {
+    color: var.$YOUBIKE_LIGHT_GREEN
+}
+
+.dark-green {
+    color: var.$YOUBIKE_DARK_GREEN
+}
+
+.bg-light-green{
+    background-color: var.$YOUBIKE_LIGHT_GREEN
+}
+
+.bg-dark-green{
+    background-color: var.$YOUBIKE_DARK_GREEN
+}
+
+.light-gray{
+    color: var.$YOUBIKE_LIGHT_GRAY
+}
+
+.dark-gray{
+    color: var.$YOUBIKE_DARK_GRAY
+}
+
+.bg-light-gray{
+    background-color: var.$YOUBIKE_LIGHT_GRAY
+}
+
+.bg-dark-gray{
+    background-color: var.$YOUBIKE_DARK_GRAY
+}

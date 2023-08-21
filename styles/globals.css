@@ -36,3 +36,13 @@ body {
     padding: 0px 30px;
   }
 }
+
+.next-image-contain {
+  object-fit: contain;
+  object-position: center;
+}
+
+.next-image-cover {
+  object-fit: contain;
+  object-position: center;
+}

@@ -1,11 +1,13 @@
 .header {
   background-color: white;
   border-bottom: 1px solid rgb(235, 235, 235);
-  height: 105px;
   position: relative;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1024px) {
+  .header {
+    height: 105px;
+  }
   .menu {
     flex-grow: 1;
     display: flex;
@@ -39,7 +41,10 @@
     display: none;
   }
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
+  .header {
+    height: 90px;
+  }
   .menu {
     position: absolute;
     display: flex;
@@ -48,7 +53,7 @@
     padding: 40px 60px;
     top: 100%;
     left: 100%;
-    height: calc(100vh - 105px);
+    height: calc(100vh - 90px);
     width: 100vw;
     z-index: 100;
     background-color: rgb(181, 205, 34);
@@ -65,12 +70,12 @@
     text-align: center;
   }
 }
-@media screen and (max-width: 1000px) and (max-width: 600px) {
+@media screen and (max-width: 1024px) and (max-width: 600px) {
   .menuLi {
     text-align: left;
   }
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
   .menuLink {
     color: white;
     transition: color 0.2s ease;
@@ -92,7 +97,7 @@
     margin: auto;
   }
 }
-@media screen and (max-width: 1000px) and (max-width: 600px) {
+@media screen and (max-width: 1024px) and (max-width: 600px) {
   .loginBtn {
     margin: 0;
   }

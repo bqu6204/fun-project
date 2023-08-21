@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import "@/styles/dist/global-buttons.css";
+import "@/styles/dist/global-colors.css";
 import type { AppProps } from "next/app";
 import { NextPageWithLayout } from "./page";
 

@@ -27,7 +27,7 @@ function useDebounce<R>(
     if (!istriggered) return;
 
     const result = callback();
-    setResult(result);
+    if (result) setResult(result);
   }, [shouldUpdate]);
 
   return [result, refreshDelay];

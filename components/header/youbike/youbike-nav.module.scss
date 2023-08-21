@@ -1,15 +1,19 @@
 @use '../../../styles/vars' as var;
 $HEADER_HEIGHT:105px;
+$HEADER_RWD_HEIGHT: 90px;
 
 .header{
     background-color: white;
     border-bottom: 1px solid rgb(235, 235,235);
-    height: 105px;
     position: relative;
 }
 
 
 @media screen and (min-width: var.$BREAKPOINT_1){
+    .header{
+        height:$HEADER_HEIGHT;
+    }
+
     .menu{
         flex-grow: 1;
         display: flex;
@@ -55,6 +59,10 @@ $HEADER_HEIGHT:105px;
 
 
 @media screen and (max-width: var.$BREAKPOINT_1){
+    .header{
+        height: $HEADER_RWD_HEIGHT;
+    }
+
     .menu{
         position: absolute;
         display: flex;
@@ -63,7 +71,7 @@ $HEADER_HEIGHT:105px;
         padding: 40px 60px;
         top:100%;
         left:100%;
-        height: calc(100vh - $HEADER_HEIGHT);
+        height: calc(100vh - $HEADER_RWD_HEIGHT);
         width: 100vw;
  
         z-index: 100;

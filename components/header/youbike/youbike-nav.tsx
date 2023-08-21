@@ -24,13 +24,15 @@ const YoubikeNav: React.FC = () => {
       <header className={`${styleSheet.header} relative`}>
         <div className="h-full flex items-center  youbike-page">
           <Link href="/" target="_blank">
-            <Image
-              src="/logos/youbike.png"
-              alt="Link back to home"
-              title="youbike logo"
-              height={90}
-              width={90}
-            />
+            <h1>
+              <Image
+                src="/logos/youbike.png"
+                alt="Link back to home"
+                title="youbike logo"
+                height={90}
+                width={90}
+              />
+            </h1>
           </Link>
 
           <nav
@@ -63,7 +65,7 @@ const YoubikeNav: React.FC = () => {
             >
               <div
                 className={`${
-                  windowWidth > 1000
+                  windowWidth > 1024
                     ? "g-btn-primary g-btn-f-to-f"
                     : "g-btn-primary g-btn-t-to-t"
                 } ${styleSheet.loginBtn} text-lg w-24`}
