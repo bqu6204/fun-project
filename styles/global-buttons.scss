@@ -1,0 +1,101 @@
+@mixin button_base_setup($cursor) {
+    padding: 0.5rem 1rem;
+    border: 1px solid;
+    border-radius: 30px;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    user-select: none;
+    text-align: center;
+
+    cursor: $cursor;
+}
+
+@mixin button_color_fill($color) {
+    background-color: $color;
+    color: white;
+    border-color: $color;
+}
+
+@mixin button_color_transparent($color) {
+    background-color: white;
+    color: $color;
+    border-color: $color;
+}
+
+@mixin button_color_hover_fill($color) {
+    &:hover {
+        background-color: $color;
+        color: white;
+        border-color: $color;
+    }
+}
+
+@mixin button_color_hover_transparent($color) {
+    &:hover {
+        background-color: white;
+        color: $color;
+        border-color: $color;
+    }
+}
+
+@mixin button_hover_effect($color, $color_noticeable) {
+    // t: background transparent, f: background fill
+    &.g-btn-t-to-f {
+        @include button_color_transparent($color);
+        @include button_color_hover_fill($color);
+    }
+
+    &.g-btn-f-to-t {
+        @include button_color_fill($color);
+        @include button_color_hover_transparent($color);
+    }
+
+    &.g-btn-t-to-t {
+        @include button_color_transparent($color);
+        @include button_color_hover_transparent($color_noticeable);
+    }
+
+    &.g-btn-f-to-f {
+        @include button_color_fill($color);
+        @include button_color_hover_fill($color_noticeable);
+    }
+}
+
+.g-btn-primary {
+    @include button_base_setup(pointer);
+    $COLOR: rgb(181, 205, 34);
+    $COLOR_NOTICEABLE: rgb(103, 117,17);
+
+    // t: transparent , f: fill
+    // g-btn-t-to-f, g-btn-f-to-t, g-btn-t-to-t, g-btn-f-to-t
+    @include button_hover_effect($COLOR, $COLOR_NOTICEABLE);
+}
+
+.g-btn-secondary {
+    @include button_base_setup(pointer);
+    $COLOR_NOTICEABLE: rgb(103, 117,17);
+    $COLOR_NOTICEABLE:white;
+
+    // t: transparent , f: fill
+    // g-btn-t-to-f, g-btn-f-to-t, g-btn-t-to-t, g-btn-f-to-t
+    @include button_hover_effect($COLOR, $COLOR_NOTICEABLE);
+}
+
+.g-btn-grass {
+    @include button_base_setup(pointer);
+    $COLOR: rgb(100, 200, 0);
+    $COLOR_NOTICEABLE: rgb(50, 150, 0);
+
+    // t: transparent , f: fill
+    // g-btn-t-to-f, g-btn-f-to-t, g-btn-t-to-t, g-btn-f-to-t
+    @include button_hover_effect($COLOR, $COLOR_NOTICEABLE);
+}
+
+.g-btn-disabled {
+    @include button_base_setup(not-allowed);
+
+    color: white;
+
+    $COLOR_disabled: rgb(180, 180, 180);
+    border: 1px solid $COLOR_disabled;
+    background-color: $COLOR_disabled;
+}

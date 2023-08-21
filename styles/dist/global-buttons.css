@@ -1,0 +1,170 @@
+.g-btn-primary {
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  border-radius: 30px;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  text-align: center;
+  cursor: pointer;
+}
+.g-btn-primary.g-btn-t-to-f {
+  background-color: white;
+  color: rgb(181, 205, 34);
+  border-color: rgb(181, 205, 34);
+}
+.g-btn-primary.g-btn-t-to-f:hover {
+  background-color: rgb(181, 205, 34);
+  color: white;
+  border-color: rgb(181, 205, 34);
+}
+.g-btn-primary.g-btn-f-to-t {
+  background-color: rgb(181, 205, 34);
+  color: white;
+  border-color: rgb(181, 205, 34);
+}
+.g-btn-primary.g-btn-f-to-t:hover {
+  background-color: white;
+  color: rgb(181, 205, 34);
+  border-color: rgb(181, 205, 34);
+}
+.g-btn-primary.g-btn-t-to-t {
+  background-color: white;
+  color: rgb(181, 205, 34);
+  border-color: rgb(181, 205, 34);
+}
+.g-btn-primary.g-btn-t-to-t:hover {
+  background-color: white;
+  color: rgb(103, 117, 17);
+  border-color: rgb(103, 117, 17);
+}
+.g-btn-primary.g-btn-f-to-f {
+  background-color: rgb(181, 205, 34);
+  color: white;
+  border-color: rgb(181, 205, 34);
+}
+.g-btn-primary.g-btn-f-to-f:hover {
+  background-color: rgb(103, 117, 17);
+  color: white;
+  border-color: rgb(103, 117, 17);
+}
+
+.g-btn-secondary {
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  border-radius: 30px;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  text-align: center;
+  cursor: pointer;
+}
+.g-btn-secondary.g-btn-t-to-f {
+  background-color: white;
+  color: rgb(150, 100, 0);
+  border-color: rgb(150, 100, 0);
+}
+.g-btn-secondary.g-btn-t-to-f:hover {
+  background-color: rgb(150, 100, 0);
+  color: white;
+  border-color: rgb(150, 100, 0);
+}
+.g-btn-secondary.g-btn-f-to-t {
+  background-color: rgb(150, 100, 0);
+  color: white;
+  border-color: rgb(150, 100, 0);
+}
+.g-btn-secondary.g-btn-f-to-t:hover {
+  background-color: white;
+  color: rgb(150, 100, 0);
+  border-color: rgb(150, 100, 0);
+}
+.g-btn-secondary.g-btn-t-to-t {
+  background-color: white;
+  color: rgb(150, 100, 0);
+  border-color: rgb(150, 100, 0);
+}
+.g-btn-secondary.g-btn-t-to-t:hover {
+  background-color: white;
+  color: rgb(200, 150, 0);
+  border-color: rgb(200, 150, 0);
+}
+.g-btn-secondary.g-btn-f-to-f {
+  background-color: rgb(150, 100, 0);
+  color: white;
+  border-color: rgb(150, 100, 0);
+}
+.g-btn-secondary.g-btn-f-to-f:hover {
+  background-color: rgb(200, 150, 0);
+  color: white;
+  border-color: rgb(200, 150, 0);
+}
+
+.g-btn-grass {
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  border-radius: 30px;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  text-align: center;
+  cursor: pointer;
+}
+.g-btn-grass.g-btn-t-to-f {
+  background-color: white;
+  color: rgb(100, 200, 0);
+  border-color: rgb(100, 200, 0);
+}
+.g-btn-grass.g-btn-t-to-f:hover {
+  background-color: rgb(100, 200, 0);
+  color: white;
+  border-color: rgb(100, 200, 0);
+}
+.g-btn-grass.g-btn-f-to-t {
+  background-color: rgb(100, 200, 0);
+  color: white;
+  border-color: rgb(100, 200, 0);
+}
+.g-btn-grass.g-btn-f-to-t:hover {
+  background-color: white;
+  color: rgb(100, 200, 0);
+  border-color: rgb(100, 200, 0);
+}
+.g-btn-grass.g-btn-t-to-t {
+  background-color: white;
+  color: rgb(100, 200, 0);
+  border-color: rgb(100, 200, 0);
+}
+.g-btn-grass.g-btn-t-to-t:hover {
+  background-color: white;
+  color: rgb(50, 150, 0);
+  border-color: rgb(50, 150, 0);
+}
+.g-btn-grass.g-btn-f-to-f {
+  background-color: rgb(100, 200, 0);
+  color: white;
+  border-color: rgb(100, 200, 0);
+}
+.g-btn-grass.g-btn-f-to-f:hover {
+  background-color: rgb(50, 150, 0);
+  color: white;
+  border-color: rgb(50, 150, 0);
+}
+
+.g-btn-disabled {
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  border-radius: 30px;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  text-align: center;
+  cursor: not-allowed;
+  color: white;
+  border: 1px solid rgb(180, 180, 180);
+  background-color: rgb(180, 180, 180);
+}

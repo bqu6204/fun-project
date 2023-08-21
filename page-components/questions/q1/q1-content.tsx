@@ -45,7 +45,11 @@ const Q1Content: React.FC = () => {
       </i>
 
       <div className="text-gray-600 my-4">
-        Output: <b className="text-3xl"> {output ? String(output) : ""}</b>
+        Output:{" "}
+        <b className={`${styleSheet.output} text-3xl`}>
+          <br />
+          {output ? String(output) : ""}
+        </b>
       </div>
     </div>
   );

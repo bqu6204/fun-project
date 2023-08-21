@@ -11,4 +11,10 @@
     ],
     "liveSassCompile.settings.generateMap": false,
     "css.lint.unknownAtRules": "ignore",
+    "scss.compilerOptions": {
+        "baseUrl": "path/to/your/root/directory",
+        "paths": {
+          "@/*": ["src/*"]
+        }
+      }
 }

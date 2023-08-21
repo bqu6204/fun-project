@@ -1,0 +1,99 @@
+.header {
+  background-color: white;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  height: 105px;
+  position: relative;
+}
+
+@media screen and (min-width: 1000px) {
+  .menu {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+  .menuUl {
+    display: flex;
+  }
+  .menuLi:first-child {
+    margin-left: 40px;
+  }
+  .menuLink {
+    color: rgb(103, 117, 17);
+    font-size: 1.1rem;
+    height: 100%;
+    width: 100%;
+    display: block;
+    padding: 20px 20px;
+    transition: color 0.2s ease;
+  }
+  .menuLink:hover {
+    color: rgb(181, 205, 34);
+  }
+  .menuLink.isCurrentPage {
+    color: rgb(181, 205, 34);
+  }
+  .login {
+    margin-left: auto;
+  }
+  .burger {
+    display: none;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 60px;
+    top: 100%;
+    left: 100%;
+    height: calc(100vh - 105px);
+    width: 100vw;
+    z-index: 100;
+    background-color: rgb(181, 205, 34);
+    transition: left 0.4s ease;
+  }
+  .menu.isMenuOpen {
+    left: 0%;
+  }
+  .menuLi {
+    line-height: 60px;
+    width: 100%;
+    letter-spacing: 0.5rem;
+    font-size: large;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 1000px) and (max-width: 600px) {
+  .menuLi {
+    text-align: left;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .menuLink {
+    color: white;
+    transition: color 0.2s ease;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .menuLink:hover {
+    color: rgb(103, 117, 17);
+  }
+  .menuLink.isCurrentPage {
+    color: rgb(103, 117, 17);
+  }
+  .burger {
+    display: block;
+    margin-left: auto;
+  }
+  .loginBtn {
+    margin: auto;
+  }
+}
+@media screen and (max-width: 1000px) and (max-width: 600px) {
+  .loginBtn {
+    margin: 0;
+  }
+}
