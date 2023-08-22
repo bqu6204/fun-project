@@ -25,36 +25,41 @@ const SpinningWheel: React.FC<ISpinningWheel> = ({
 }) => {
   const spinDurationMs = 2000;
   const [rotateDegree, setRotateDegree] = useState<number>(0);
-  const [spinResult, setSpinResult] = useState<string>("");
-  const [isSpinning, setIsSpinning] = useState<boolean>(false);
+
+  const totalPercentage = prizes.reduce(
+    (total, prize) => total + prize.percentage,
+    0
+  );
+  const defaultPercentage = 100 - totalPercentage;
+  const defaultPrize = {
+    title: "No Prize",
+    percentage: defaultPercentage,
+    backgroundColor: "#999",
+  };
+
+  const [adjustedPrizes, setAdjustedPrizes] = useState<TPrize[]>([
+    ...prizes,
+    defaultPrize,
+  ]);
+
+  const prizeCount = adjustedPrizes.length;
+  const prizeDegree = 360 / prizeCount;
+  const clipPercentage = calculateClipPercentage(prizeCount);
 
   function spinStart() {
-    if (isSpinning) return;
-    setIsSpinning(true);
-
-    if (onSpinStart) onSpinStart();
-
-    const randomAngle = Math.floor(Math.random() * 361);
-    setRotateDegree((prev) => prev + 360 * 2 + randomAngle);
+    const randomDegree = Math.floor(Math.random() * 360);
+    setRotateDegree(randomDegree);
   }
 
   function spinEnd() {
-    setIsSpinning(false);
-    console.log("rotate degree:", rotateDegree);
-    const result = calculateResult(rotateDegree);
-    console.log("result: ", result);
-    if (onSpinEnd) onSpinEnd("123");
-  }
+    const adjustedRotateDegree = rotateDegree % 360; // Ensure the degree is within 0-359 range
+    const resultIndex = Math.floor(
+      (prizeCount - adjustedRotateDegree / prizeDegree) % prizeCount
+    );
 
-  function calculateResult(rotateDegree: number) {
-    const anglePerPrize = 360 / prizes.length;
-    console.log("angle per prize: ", anglePerPrize);
-    const mod = (rotateDegree + anglePerPrize) % 360;
-    console.log("mod", mod);
-
-    const index = Math.floor(mod / anglePerPrize);
-    console.log("index", index);
-    return prizes[index].title;
+    const resultPrize = prizes[resultIndex];
+    console.log("index", resultIndex);
+    console.log("prize", resultPrize);
   }
 
   useEffect(() => {
@@ -63,6 +68,18 @@ const SpinningWheel: React.FC<ISpinningWheel> = ({
 
     return () => clearTimeout(timeOut);
   }, [rotateDegree]);
+
+  function calculateClipPercentage(N: number): number {
+    if (N <= 4) return 100;
+
+    const clipAngleDegrees = (90 - 360 / N) / 2;
+    const clipAngleRadians = (clipAngleDegrees * Math.PI) / 180;
+    const clipTan = Math.tan(clipAngleRadians);
+
+    const clipSidePercentage = Math.round((1 - clipTan) * 100);
+
+    return clipSidePercentage;
+  }
 
   return (
     <div
@@ -77,6 +94,8 @@ const SpinningWheel: React.FC<ISpinningWheel> = ({
           prizes={prizes}
           rotateDegree={rotateDegree}
           spinDurationMs={spinDurationMs}
+          clipPercentage={clipPercentage}
+          prizeDegree={prizeDegree}
         />
       </div>
     </div>
