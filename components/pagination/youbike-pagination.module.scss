@@ -1,0 +1,37 @@
+@use '../../styles/vars' as var;
+
+.prev,  .next{
+    color: var.$YOUBIKE_DARK_GREEN;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-size: 0.9rem;
+ 
+    padding:3px 5px;
+    border-radius: 5px;
+}
+
+.prev{
+    margin-right: 20px;
+}
+
+.next{
+    margin-left: 20px;
+}
+
+.input{
+    color: var.$YOUBIKE_DARK_GREEN;
+    text-align: center;
+    font-size: larger;
+    font-weight: 800;
+    width:50px;
+    outline: none;
+
+    &::before{
+        content:''
+    }
+}
+
+
+.totalPages{
+    color: var.$YOUBIKE_DARK_GREEN;
+}

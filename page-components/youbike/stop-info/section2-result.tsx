@@ -2,6 +2,7 @@ import styleSheet from "@/styles/dist/section2-result.module.css";
 import { useYoubikeSelector } from "@/hooks/useRedux";
 import { IYoubikeData } from "@/type";
 import { useState } from "react";
+import YoubikePagination from "@/components/pagination/youbike-pagination";
 
 interface ISection2Result {
   dataList: IYoubikeData[];
@@ -16,9 +17,43 @@ const Section2Result: React.FC<ISection2Result> = ({
 }) => {
   const { currentCounty } = useYoubikeSelector((state) => state.youbikeFilter);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [sortKey, setSortKey] = useState<keyof IYoubikeData>("sarea");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+
   const itemsPerPage = 6;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+  const totalPages = Math.ceil(dataList.length / itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const handleSort = (key: keyof IYoubikeData) => {
+    if (sortKey === key) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortKey(key);
+      setSortOrder("asc");
+    }
+  };
+
+  const sortedAndSlicedData = [...dataList]
+    .sort((a, b) => {
+      const aValue = a[sortKey];
+      const bValue = b[sortKey];
+      if (typeof aValue === "string" && typeof bValue === "string") {
+        return sortOrder === "asc"
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
+      } else if (typeof aValue === "number" && typeof bValue === "number") {
+        return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
+      }
+      return 0;
+    })
+    .slice(startIndex, endIndex);
 
   return (
     <div className={`${styleSheet.container} ${className}`}>
@@ -26,19 +61,19 @@ const Section2Result: React.FC<ISection2Result> = ({
         <thead className={styleSheet.thead}>
           <tr>
             <th>縣市</th>
-            <th>區域</th>
-            <th>站點名稱</th>
-            <th>可借車輛</th>
-            <th>可還空位</th>
+            <th onClick={() => handleSort("sarea")}>區域</th>
+            <th onClick={() => handleSort("sna")}>站點名稱</th>
+            <th onClick={() => handleSort("sbi")}>可借車輛</th>
+            <th onClick={() => handleSort("bemp")}>可還空位</th>
           </tr>
         </thead>
 
         <tbody
           className={`${styleSheet.tbody} ${
-            isFiltering ? styleSheet.isFiltering : ""
+            isFiltering && dataList.length !== 0 ? styleSheet.isFiltering : ""
           }`}
         >
-          {dataList.slice(startIndex, endIndex).map((data) => {
+          {sortedAndSlicedData.map((data) => {
             return (
               <tr key={data.sno}>
                 <td>{currentCounty}</td>
@@ -51,6 +86,17 @@ const Section2Result: React.FC<ISection2Result> = ({
           })}
         </tbody>
       </table>
+
+      <div className="flex gap-8 justify-center mt-4 items-center">
+        <YoubikePagination
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+          totalPages={totalPages}
+        />
+        <span className="dark-green">
+          共 <b className="text-xl">{dataList.length}</b> 筆資料
+        </span>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,32 @@
+.prev, .next {
+  color: rgb(103, 117, 17);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 0.9rem;
+  padding: 3px 5px;
+  border-radius: 5px;
+}
+
+.prev {
+  margin-right: 20px;
+}
+
+.next {
+  margin-left: 20px;
+}
+
+.input {
+  color: rgb(103, 117, 17);
+  text-align: center;
+  font-size: larger;
+  font-weight: 800;
+  width: 50px;
+  outline: none;
+}
+.input::before {
+  content: "";
+}
+
+.totalPages {
+  color: rgb(103, 117, 17);
+}

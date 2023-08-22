@@ -72,7 +72,7 @@ const StopInfoView: React.FC<IStopInfoView> = () => {
     <div className=" w-screen bg-white youbike-page">
       <Section1Filter />
       <Section2Result
-        className="my-16"
+        className="my-4"
         isFiltering={isPending}
         dataList={filterdDataList !== null ? filterdDataList : dataList}
       />

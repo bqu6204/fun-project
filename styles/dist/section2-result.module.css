@@ -27,30 +27,20 @@
   }
 }
 
+.tbody {
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+  box-shadow: 1px 0px 0px rgb(174, 174, 174), -1px 0px 0px rgb(174, 174, 174), 0px 1px 0px rgb(174, 174, 174);
+}
 .tbody tr:last-child td:first-child {
   border-radius: 0px 0px 0px 20px;
-  box-shadow: -1px 0px 0px rgb(174, 174, 174), 0px 1px 0px rgb(174, 174, 174);
 }
 .tbody tr:last-child td:last-child {
   border-radius: 0px 0px 20px 0px;
-  box-shadow: 1px 0px 0px rgb(174, 174, 174), 0px 1px 0px rgb(174, 174, 174);
-}
-.tbody tr:last-child td {
-  box-shadow: 0px 1px 0px rgb(174, 174, 174);
-}
-.tbody tr td:first-child {
-  box-shadow: -1px 0px 0px rgb(174, 174, 174);
-}
-.tbody tr td:last-child {
-  box-shadow: 1px 0px 0px rgb(174, 174, 174);
 }
 @media screen and (max-width: 1024px) {
   .tbody tr:last-child td:nth-child(3) {
     border-radius: 0px 0px 20px 0px;
-    box-shadow: 1px 0px 0px rgb(174, 174, 174), 0px 1px 0px rgb(174, 174, 174);
-  }
-  .tbody td:nth-child(3) {
-    box-shadow: 1px 0px 0px rgb(174, 174, 174);
   }
 }
 
@@ -61,10 +51,10 @@
   font-weight: 400;
   transition: background-color 0.3s ease;
 }
-.thead th:first-child, .thead th:nth-child(2) {
+.thead th:not(:first-child) {
   cursor: pointer;
 }
-.thead th:first-child:hover, .thead th:nth-child(2):hover {
+.thead th:not(:first-child):hover {
   background-color: rgb(103, 117, 17);
 }
 .thead th:first-child {
@@ -90,15 +80,18 @@
   }
 }
 
+.tbody {
+  position: relative;
+}
 .tbody::after {
   position: absolute;
   content: "更新中......";
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10vw;
+  font-size: 3rem;
   font-weight: 600;
-  top: 0%;
+  bottom: 0%;
   left: 0%;
   width: 100%;
   height: 100%;
@@ -108,7 +101,7 @@
 }
 .tbody.isFiltering::after {
   opacity: 1;
-  color: rgb(0, 0, 0);
+  color: rgb(103, 117, 17);
   background-color: rgba(255, 255, 255, 0.9);
 }
 .tbody tr:nth-child(even) {

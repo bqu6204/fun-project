@@ -27,7 +27,11 @@ const Section1Filter: React.FC = () => {
   const dispatch = useYoubikeDispatch();
 
   return (
-    <div className={"grid grid-cols-1 md:grid-cols-2 gap-x-8 min-h-[350px]"}>
+    <div
+      className={
+        "grid grid-cols-1 md:grid-cols-2 gap-x-8 md:min-h-[400px] sm:min-h-[480px] min-h-[500px]"
+      }
+    >
       <div>
         <h2
           className={"mt-8 light-green text-2xl font-medium tracking-[.25rem]"}
