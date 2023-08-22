@@ -5,13 +5,73 @@
 }
 
 .table{
-    border-radius: 20px;
-    overflow: hidden;
     width: 100%;
     height: fit-content;
     font-weight: 300;
 }
 
+
+// border
+.thead{
+    th{
+    box-shadow: -1px 0px 0px var.$YOUBIKE_LIGHT_GREEN,
+    1px 0px 0px var.$YOUBIKE_LIGHT_GREEN;
+    }
+
+    th:first-child{
+        border-radius: 20px 0px 0px 0px ;
+    }
+    th:last-child{
+        border-radius: 0px 20px 0px 0px ;
+    }
+    @media screen and (max-width: var.$BREAKPOINT_1) {
+        th:nth-child(3){
+            border-radius: 0px 20px 0px 0px ;
+        }
+    }
+}
+
+.tbody{
+    tr:last-child td:first-child{
+        border-radius: 0px 0px 0px 20px;
+        box-shadow: -1px 0px 0px var.$YOUBIKE_DARK_GRAY,
+        0px 1px 0px var.$YOUBIKE_DARK_GRAY;
+    }
+
+    tr:last-child td:last-child{
+        border-radius: 0px 0px 20px 0px;
+        box-shadow: 1px 0px 0px  var.$YOUBIKE_DARK_GRAY,
+        0px 1px 0px var.$YOUBIKE_DARK_GRAY;
+    }
+
+    tr:last-child td{
+        box-shadow: 0px 1px 0px var.$YOUBIKE_DARK_GRAY;
+    }
+
+    
+    tr td:first-child{
+        box-shadow: -1px 0px 0px var.$YOUBIKE_DARK_GRAY,
+    }
+
+    tr td:last-child{
+           box-shadow: 1px 0px 0px  var.$YOUBIKE_DARK_GRAY;
+    }
+
+    @media screen and (max-width: var.$BREAKPOINT_1){
+        tr:last-child td:nth-child(3){
+            border-radius: 0px 0px 20px 0px,; 
+            box-shadow: 1px 0px 0px  var.$YOUBIKE_DARK_GRAY,
+            0px 1px 0px  var.$YOUBIKE_DARK_GRAY;
+        }
+        td:nth-child(3){
+            box-shadow: 1px 0px 0px  var.$YOUBIKE_DARK_GRAY;
+        }
+    }
+
+}
+
+
+// width , paddings, others
 .thead th{
     background-color: var.$YOUBIKE_LIGHT_GREEN;
     color: white;
@@ -55,9 +115,7 @@
     }
 }
 
-
 .tbody{
-    position:relative;
     &::after{
         position: absolute;
         content:'更新中......';
@@ -81,9 +139,10 @@
         color:rgba(0, 0, 0, 1);
         background-color: rgba(255, 255, 255, 0.9);
     }
-}
 
-.tbody{
+
+
+
     tr:nth-child(even){
         background-color: var.$YOUBIKE_LIGHT_GRAY;
     }

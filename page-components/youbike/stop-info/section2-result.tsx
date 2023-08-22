@@ -6,16 +6,22 @@ import { useState } from "react";
 interface ISection2Result {
   dataList: IYoubikeData[];
   isFiltering: boolean;
+  className: string;
 }
 
 const Section2Result: React.FC<ISection2Result> = ({
   dataList,
   isFiltering,
+  className,
 }) => {
   const { currentCounty } = useYoubikeSelector((state) => state.youbikeFilter);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 6;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
   return (
-    <div className={styleSheet.container}>
+    <div className={`${styleSheet.container} ${className}`}>
       <table className={styleSheet.table}>
         <thead className={styleSheet.thead}>
           <tr>
@@ -32,7 +38,7 @@ const Section2Result: React.FC<ISection2Result> = ({
             isFiltering ? styleSheet.isFiltering : ""
           }`}
         >
-          {dataList.map((data) => {
+          {dataList.slice(startIndex, endIndex).map((data) => {
             return (
               <tr key={data.sno}>
                 <td>{currentCounty}</td>
