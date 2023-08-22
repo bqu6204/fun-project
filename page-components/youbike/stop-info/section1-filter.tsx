@@ -1,6 +1,4 @@
 import Image from "next/image";
-import styleSheet from "@/styles/dist/section1-filter.module.css";
-import { useState } from "react";
 import { useYoubikeSelector, useYoubikeDispatch } from "@/hooks/useRedux";
 import {
   selectCounty,
@@ -8,6 +6,7 @@ import {
   checkDistrict,
   checkAllDistricts,
 } from "@/redux/youbike/youbike-filter-slice";
+import { useRef } from "react";
 
 import YoubikeSelect from "@/components/inputs/select/youbike-select";
 import YoubikeSearch from "@/components/inputs/search/youbike-search";
@@ -16,17 +15,19 @@ import YoubikeCheckBox from "@/components/inputs/checkbox/youbike-checkbox";
 import taiwanCountyDistrcits from "@/public/data/taiwan-county-districts.json";
 
 const Section1Filter: React.FC = () => {
+  const isFirstRenderRef = useRef(true);
+
   const counties = Object.keys(
     taiwanCountyDistrcits
   ) as (keyof typeof taiwanCountyDistrcits)[];
 
-  const { county, districts, search, searchTerms } = useYoubikeSelector(
-    (state) => state.youbikeFilter
-  );
+  const { currentCounty, allCountyAreas, search, searchTerms } =
+    useYoubikeSelector((state) => state.youbikeFilter);
+
   const dispatch = useYoubikeDispatch();
 
   return (
-    <div className={"grid grid-cols-1 md:grid-cols-2 gap-x-8"}>
+    <div className={"grid grid-cols-1 md:grid-cols-2 gap-x-8 min-h-[350px]"}>
       <div>
         <h2
           className={"mt-8 light-green text-2xl font-medium tracking-[.25rem]"}
@@ -37,34 +38,59 @@ const Section1Filter: React.FC = () => {
           <YoubikeSelect
             className="mt-[10px]"
             options={counties}
-            currentValue={county}
-            onChange={(value) => dispatch(selectCounty(value))}
+            currentValue={isFirstRenderRef.current ? "" : currentCounty}
+            onChange={(value) => {
+              isFirstRenderRef.current = false;
+              dispatch(selectCounty(value));
+            }}
           />
           <YoubikeSearch
             className="grow mt-[10px]"
             currentValue={search}
-            onChange={(value) => dispatch(setSearch(value))}
-            searchTerms={counties}
+            onChange={(value) => {
+              isFirstRenderRef.current = false;
+              dispatch(setSearch(value));
+            }}
+            searchTerms={searchTerms}
           />
         </div>
 
-        <YoubikeCheckBox
-          className="my-6"
-          isChecked={districts.every((district) => district.isChecked)}
-          value="全部勾選"
-          onChange={(value) => dispatch(checkAllDistricts(value))}
-        />
-        <div className="grid grid-cols-3 lg:grid-cols-4 gap-y-6">
-          {districts.map((district) => {
-            return (
-              <YoubikeCheckBox
-                isChecked={district.isChecked}
-                value={district.name}
-                onChange={(value) => dispatch(checkDistrict(value))}
-              />
-            );
-          })}
-        </div>
+        {!currentCounty ? (
+          <>請選擇一個城市</>
+        ) : allCountyAreas[currentCounty].length > 0 ? (
+          <>
+            <YoubikeCheckBox
+              className="my-6"
+              isChecked={allCountyAreas[currentCounty].every(
+                (area) => area.isChecked
+              )}
+              value="全部勾選"
+              onChange={(value) => {
+                isFirstRenderRef.current = false;
+                dispatch(checkAllDistricts(value));
+              }}
+            />
+            <div className="grid grid-cols-3 lg:grid-cols-4 gap-y-6">
+              {allCountyAreas[currentCounty].map((area, idx) => {
+                return (
+                  <YoubikeCheckBox
+                    key={idx}
+                    isChecked={area.isChecked}
+                    value={area.name}
+                    onChange={(value) => {
+                      isFirstRenderRef.current = false;
+                      dispatch(checkDistrict(value));
+                    }}
+                  />
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <div className="flex justify-center items-center h-100 w-100 text-center">
+            pending
+          </div>
+        )}
       </div>
       <div
         className="hidden md:block relative"

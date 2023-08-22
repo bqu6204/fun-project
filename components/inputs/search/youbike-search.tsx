@@ -79,7 +79,15 @@ const YoubikeSearch: React.FC<IYoubikeSearch> = ({
                   }`}
                   onMouseDown={(e) => handleSelect(e, term)}
                 >
-                  {term}
+                  {Array.from(term).map((char) => (
+                    <span
+                      className={
+                        currentValue.includes(char) ? styleSheet.equalChar : ""
+                      }
+                    >
+                      {char}
+                    </span>
+                  ))}
                 </li>
               ))
             ) : (

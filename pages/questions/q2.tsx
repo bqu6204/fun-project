@@ -1,17 +1,9 @@
 import PrimaryLayout from "@/components/layout/primary-layout";
 import { NextPageWithLayout } from "../page";
-import QuestionInfo from "@/page-components/questions/question-info";
-import Q2Content from "@/page-components/questions/q2/q2-content";
+import Q2View from "@/page-components/questions/q2/q2-view";
 
 const Q2: NextPageWithLayout = () => {
-  return (
-    <main>
-      <div className="flex flex-col space-y-3 ">
-        <QuestionInfo title="Question 2" discription="抽抽樂，歡迎來抽獎！" />
-        <Q2Content />
-      </div>
-    </main>
-  );
+  return <Q2View />;
 };
 
 export default Q2;

@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import youbikeFilterReducer from "./youbike-filter-slice";
+import youbikeDataReducer from "./youbike-data-slice";
 
 const youbikeStore = configureStore({
   reducer: {
     youbikeFilter: youbikeFilterReducer,
+    youbikeData: youbikeDataReducer,
   },
 });
 

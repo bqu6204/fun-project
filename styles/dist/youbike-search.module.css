@@ -38,4 +38,10 @@
   width: 100%;
   top: calc(100% + 10px);
   z-index: 1;
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.equalChar {
+  font-weight: 500;
 }

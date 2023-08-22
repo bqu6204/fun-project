@@ -1,0 +1,110 @@
+@charset "UTF-8";
+.container {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.table {
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-weight: 300;
+}
+
+.thead th {
+  background-color: rgb(181, 205, 34);
+  color: white;
+  padding: 18px;
+  font-weight: 400;
+  transition: background-color 0.3s ease;
+}
+.thead th:first-child, .thead th:nth-child(2) {
+  cursor: pointer;
+}
+.thead th:first-child:hover, .thead th:nth-child(2):hover {
+  background-color: rgb(103, 117, 17);
+}
+.thead th:first-child {
+  width: 15%;
+}
+.thead th:nth-child(2) {
+  width: 15%;
+}
+.thead th:nth-child(4), .thead th:nth-child(5) {
+  width: 18%;
+}
+@media screen and (max-width: 1024px) {
+  .thead th:nth-child(4), .thead th:nth-child(5) {
+    display: none;
+  }
+}
+@media screen and (max-width: 600px) {
+  .thead th:first-child {
+    width: 70px;
+  }
+  .thead th:nth-child(2) {
+    width: 70px;
+  }
+}
+
+.tbody {
+  position: relative;
+}
+.tbody::after {
+  position: absolute;
+  content: "更新中......";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10vw;
+  font-weight: 600;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  color: rgba(255, 255, 255, 0);
+}
+.tbody.isFiltering::after {
+  opacity: 1;
+  color: rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.tbody tr:nth-child(even) {
+  background-color: rgb(246, 246, 246);
+}
+.tbody tr {
+  height: 80px;
+  -webkit-user-select: text;
+     -moz-user-select: text;
+          user-select: text;
+}
+.tbody td:not(:nth-child(3)) {
+  text-align: center;
+}
+.tbody td:nth-child(3) {
+  padding-left: 80px;
+}
+.tbody td:nth-child(4), .tbody td:nth-child(5) {
+  color: rgb(181, 205, 34);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+@media screen and (max-width: 1024px) {
+  .tbody td:nth-child(3) {
+    padding-left: 150px;
+  }
+  .tbody td:nth-child(4), .tbody td:nth-child(5) {
+    display: none;
+  }
+}
+@media screen and (max-width: 600px) {
+  .tbody td:nth-child(3) {
+    padding-left: 30px;
+  }
+}
