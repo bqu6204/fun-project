@@ -10,7 +10,7 @@ interface IPrimaryLayout {
 
 const PrimaryLayout: React.FC<IPrimaryLayout> = ({ home, children }) => {
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen flex flex-col">
       {home ? <HomeNav /> : <QuestionNav />}
       {children}
       {home ? null : <Footer />}

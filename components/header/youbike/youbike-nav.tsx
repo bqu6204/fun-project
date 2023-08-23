@@ -20,71 +20,69 @@ const YoubikeNav: React.FC = () => {
   ];
 
   return (
-    <div className="sticky top-0 left-0 z-50">
-      <header className={`${styleSheet.header}`}>
-        <div className="h-full z-50 flex items-center relative youbike-page">
-          <Link href="/" target="_blank">
-            <h1>
-              <Image
-                src="/logos/youbike.png"
-                alt="Link back to home"
-                title="youbike logo"
-                height={90}
-                width={90}
-                priority={true}
-              />
-            </h1>
-          </Link>
+    <header className={`${styleSheet.header}`}>
+      <div className="h-full z-50 flex items-center relative youbike-page">
+        <Link href="/" target="_blank">
+          <h1>
+            <Image
+              src="/logos/youbike.png"
+              alt="Link back to home"
+              title="youbike logo"
+              height={90}
+              width={90}
+              priority={true}
+            />
+          </h1>
+        </Link>
 
-          <nav
-            className={`${styleSheet.menu} ${
-              isMenuOpen ? styleSheet.isMenuOpen : ""
-            }`}
+        <nav
+          className={`${styleSheet.menu} ${
+            isMenuOpen ? styleSheet.isMenuOpen : ""
+          }`}
+        >
+          <ul className={styleSheet.menuUl}>
+            {menu.map((link, idx) => {
+              return (
+                <li key={idx} className={styleSheet.menuLi}>
+                  <Link
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`${styleSheet.menuLink} ${
+                      pathname === link.href ? styleSheet.isCurrentPage : ""
+                    }`}
+                    href={link.href}
+                  >
+                    {link.title}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <Link
+            href="/"
+            target="_blank"
+            className={styleSheet.login}
+            onClick={() => setIsMenuOpen(false)}
           >
-            <ul className={styleSheet.menuUl}>
-              {menu.map((link, idx) => {
-                return (
-                  <li key={idx} className={styleSheet.menuLi}>
-                    <Link
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`${styleSheet.menuLink} ${
-                        pathname === link.href ? styleSheet.isCurrentPage : ""
-                      }`}
-                      href={link.href}
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-            <Link
-              href="/"
-              target="_blank"
-              className={styleSheet.login}
-              onClick={() => setIsMenuOpen(false)}
+            <div
+              className={`${
+                windowWidth > 1024
+                  ? "g-btn-primary g-btn-f-to-f"
+                  : "g-btn-primary g-btn-t-to-t"
+              } ${styleSheet.loginBtn} text-lg w-24`}
             >
-              <div
-                className={`${
-                  windowWidth > 1024
-                    ? "g-btn-primary g-btn-f-to-f"
-                    : "g-btn-primary g-btn-t-to-t"
-                } ${styleSheet.loginBtn} text-lg w-24`}
-              >
-                登入
-              </div>
-            </Link>
-          </nav>
+              登入
+            </div>
+          </Link>
+        </nav>
 
-          <BurgerBar
-            className={styleSheet.burger}
-            isActivate={isMenuOpen}
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-            color={"rgb(181, 205, 34)"}
-          />
-        </div>
-      </header>
-    </div>
+        <BurgerBar
+          className={styleSheet.burger}
+          isActivate={isMenuOpen}
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+          color={"rgb(181, 205, 34)"}
+        />
+      </div>
+    </header>
   );
 };
 

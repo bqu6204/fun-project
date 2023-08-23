@@ -57,23 +57,25 @@ const Q3Content: React.FC = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 m-auto gap-8">
-      <div
-        className={"relative "}
-        style={{ minWidth: "300px", minHeight: "300px" }}
-      >
-        <Image
-          src="/images/component-structure.png"
-          fill
-          alt="This demonstrates the component structure of the chatroom "
-          title="component-structure"
-          style={{ objectFit: "contain", objectPosition: "center" }}
-        />
+    <div className="grid grid-cols-1 lg:grid-cols-2 m-auto gap-8 ">
+      <div className="mt-12 flex flex-col-reverse lg:flex-col">
+        <h3 className="mt-12 text-center text-4xl font-bold text-gray-600 ">
+          <i>Try the chatroom!</i>
+        </h3>
+        <div
+          className="relative flex-1"
+          style={{ minWidth: "300px", minHeight: "300px" }}
+        >
+          <Image
+            src="/images/component-structure.png"
+            fill
+            alt="This demonstrates the component structure of the chatroom "
+            title="component-structure"
+            style={{ objectFit: "contain", objectPosition: "center" }}
+          />
+        </div>
       </div>
-      <div className=" m-auto">
-        <h2 className="text-center text-2xl mb-4 font-bold">
-          Try the chatroom below !
-        </h2>
+      <div className="m-auto lg:mt-12">
         <Chatroom
           messageList={messageList}
           currentUserId="user0"

@@ -8,10 +8,10 @@ interface IYoubikeLayout {
 
 const YoubikeLayout: React.FC<IYoubikeLayout> = ({ home, children }) => {
   return (
-    <div className="min-h-screen">
+    <>
       <YoubikeNav />
       {children}
-    </div>
+    </>
   );
 };
 

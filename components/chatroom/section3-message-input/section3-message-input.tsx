@@ -14,6 +14,7 @@ const Section3MessageInput: React.FC = () => {
       <NeumorphismTextArea
         className={styleSheet.textInput}
         onSubmit={(text) => {
+          if (!text) return;
           chatroomInfo.setMessageList({
             type: EMessageAction.SENDTEXT,
             payload: {

@@ -6,12 +6,15 @@ $HEADER_RWD_HEIGHT: 90px;
     background-color: white;
     border-bottom: 1px solid rgb(235, 235,235);
 
-
+    position: sticky;
+    z-index: 500;    
+    width: 100vw;
+    top:0;
 
 }
 
 .menu{
-    z-index: 50;
+    z-index: 500;
 }
 
 @media screen and (min-width: var.$BREAKPOINT_1){
@@ -66,17 +69,16 @@ $HEADER_RWD_HEIGHT: 90px;
 @media screen and (max-width: var.$BREAKPOINT_1){
     .header{
         height: $HEADER_RWD_HEIGHT;
-
     }
 
     .menu{
-        position: absolute;
+        position: fixed;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         padding: 40px 60px;
-        top:100%;
-        left:100vw;
+        top:$HEADER_RWD_HEIGHT;
+        left: 100%;
         height: calc(100vh - $HEADER_RWD_HEIGHT);
         width: 100vw;
         z-index: 50;

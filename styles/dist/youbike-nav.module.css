@@ -1,10 +1,14 @@
 .header {
   background-color: white;
   border-bottom: 1px solid rgb(235, 235, 235);
+  position: sticky;
+  z-index: 500;
+  width: 100vw;
+  top: 0;
 }
 
 .menu {
-  z-index: 50;
+  z-index: 500;
 }
 
 @media screen and (min-width: 1024px) {
@@ -49,13 +53,13 @@
     height: 90px;
   }
   .menu {
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 40px 60px;
-    top: 100%;
-    left: 100vw;
+    top: 90px;
+    left: 100%;
     height: calc(100vh - 90px);
     width: 100vw;
     z-index: 50;
