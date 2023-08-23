@@ -19,7 +19,7 @@ const Wheel: React.FC<IWheel> = ({
     <div
       className={styleSheet.wheel}
       style={{
-        transform: `rotate(${rotateDegree}deg)`,
+        transform: `rotate(${rotateDegree}deg)  translateZ(0)`,
         transition: `transform ${spinDurationMs}ms ease`,
       }}
     >
@@ -30,10 +30,10 @@ const Wheel: React.FC<IWheel> = ({
             className={styleSheet.prize}
             style={{
               backgroundColor,
-              transform: `rotate(${prizeDegree * idx + 45}deg)`,
-              clipPath: `polygon(0 0 ,${
+              transform: `rotate(${prizeDegree * idx + 45}deg) translateZ(0)`,
+              clipPath: `polygon(0 0 ,${clipPercentage - 2}% 0, 100% 100%, 0 ${
                 clipPercentage - 2
-              }% 0, 100% 100%, 0 ${clipPercentage}%)`,
+              }%)`,
             }}
           >
             <div className={styleSheet.titleContainer}>

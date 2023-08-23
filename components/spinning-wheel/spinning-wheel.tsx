@@ -1,85 +1,78 @@
 import styleSheet from "@/styles/dist/spinning-wheel.module.css";
 import Wheel from "./wheel";
 import { useEffect, useState } from "react";
+import { useDefaultPrize, useClipPath } from "./util-hooks";
 
-interface ISpinningWheel {
-  className?: string;
-  size?: string;
-  prizes: TPrize[];
-  onSpinStart?: () => void;
-  onSpinEnd?: (result: string) => void;
-}
-
-type TPrize = {
+export type TPrize = {
   title: string;
   percentage: number;
   backgroundColor: string;
 };
+interface ISpinningWheel {
+  className?: string;
+  size?: string;
+  prizes: TPrize[];
+  defaultPrize?: TPrize;
+  spinDurationMs?: number;
+  onSpinStart?: () => string | null;
+  onSpinEnd?: () => void;
+}
 
 const SpinningWheel: React.FC<ISpinningWheel> = ({
   className,
   size,
   prizes,
+  spinDurationMs,
+  defaultPrize,
   onSpinStart,
   onSpinEnd,
 }) => {
-  const spinDurationMs = 2000;
-  const [rotateDegree, setRotateDegree] = useState<number>(0);
-
-  const totalPercentage = prizes.reduce(
-    (total, prize) => total + prize.percentage,
-    0
-  );
-  const defaultPercentage = 100 - totalPercentage;
-  const defaultPrize = {
-    title: "No Prize",
-    percentage: defaultPercentage,
-    backgroundColor: "#999",
-  };
-
-  const [adjustedPrizes, setAdjustedPrizes] = useState<TPrize[]>([
-    ...prizes,
-    defaultPrize,
-  ]);
-
-  const prizeCount = adjustedPrizes.length;
-  const prizeDegree = 360 / prizeCount;
-  const clipPercentage = calculateClipPercentage(prizeCount);
+  const [totalRotateDegree, setTotalRotateDegree] = useState<number>(0);
+  const [adjustedPrizes, setAdjustedPrizes, defaultPrizeTitle] =
+    useDefaultPrize(prizes, defaultPrize);
+  const { prizeCount, prizeDegree, clipPathPercentage, clipAngleDegrees } =
+    useClipPath(adjustedPrizes);
+  const [isSpinning, setIsSpinning] = useState<boolean>(false);
 
   function spinStart() {
-    const randomDegree = Math.floor(Math.random() * 360);
-    setRotateDegree(randomDegree);
+    setIsSpinning(true);
+
+    let resultIndexArray: number[] = [];
+
+    if (!onSpinStart) {
+      resultIndexArray.push(Math.floor(Math.random() * adjustedPrizes.length));
+    } else {
+      const onSpinStartResult = onSpinStart();
+      const targetTitle = onSpinStartResult || defaultPrizeTitle;
+
+      resultIndexArray = adjustedPrizes.reduce((accum, prize, index) => {
+        if (prize.title === targetTitle) {
+          accum.push(index);
+        }
+        return accum;
+      }, [] as number[]);
+    }
+
+    const selectedRotateIndex =
+      resultIndexArray[Math.floor(Math.random() * resultIndexArray.length)];
+
+    setTotalRotateDegree(
+      (prev) =>
+        prev - (prev % 360) - (360 * 2 + selectedRotateIndex * prizeDegree)
+    );
   }
 
   function spinEnd() {
-    const adjustedRotateDegree = rotateDegree % 360; // Ensure the degree is within 0-359 range
-    const resultIndex = Math.floor(
-      (prizeCount - adjustedRotateDegree / prizeDegree) % prizeCount
-    );
-
-    const resultPrize = prizes[resultIndex];
-    console.log("index", resultIndex);
-    console.log("prize", resultPrize);
+    setIsSpinning(false);
+    if (onSpinEnd) onSpinEnd();
   }
 
   useEffect(() => {
-    if (rotateDegree === 0) return;
+    if (totalRotateDegree === 0) return;
     const timeOut = setTimeout(spinEnd, spinDurationMs);
 
     return () => clearTimeout(timeOut);
-  }, [rotateDegree]);
-
-  function calculateClipPercentage(N: number): number {
-    if (N <= 4) return 100;
-
-    const clipAngleDegrees = (90 - 360 / N) / 2;
-    const clipAngleRadians = (clipAngleDegrees * Math.PI) / 180;
-    const clipTan = Math.tan(clipAngleRadians);
-
-    const clipSidePercentage = Math.round((1 - clipTan) * 100);
-
-    return clipSidePercentage;
-  }
+  }, [totalRotateDegree]);
 
   return (
     <div
@@ -87,14 +80,17 @@ const SpinningWheel: React.FC<ISpinningWheel> = ({
       style={{ width: size ?? "400px" }}
     >
       <div className={styleSheet.container}>
-        <div className={styleSheet.spinBtn} onClick={spinStart}>
+        <div
+          className={styleSheet.spinBtn}
+          onClick={isSpinning ? () => {} : spinStart}
+        >
           spin
         </div>
         <Wheel
-          prizes={prizes}
-          rotateDegree={rotateDegree}
-          spinDurationMs={spinDurationMs}
-          clipPercentage={clipPercentage}
+          prizes={adjustedPrizes}
+          rotateDegree={totalRotateDegree}
+          spinDurationMs={spinDurationMs || 2000}
+          clipPercentage={clipPathPercentage}
           prizeDegree={prizeDegree}
         />
       </div>

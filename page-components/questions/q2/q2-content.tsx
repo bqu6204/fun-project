@@ -1,5 +1,6 @@
 import SpinningWheel from "@/components/spinning-wheel/spinning-wheel";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import Q2PrizeInfo, { TSpinResult } from "./q2-prize-info";
 
 type TPrize = {
   title: string;
@@ -18,43 +19,74 @@ const Q2Content: React.FC = () => {
       { title: "伍等獎", percentage: 25, backgroundColor: "#191", count: 9 },
     ].sort((a, b) => a.percentage - b.percentage)
   );
-  const [prizeWon, setPrizeWon] = useState<string | "">("");
 
-  const handlePlay = () => {
-    const randomNumber = Math.random();
+  const [spinResultList, setSpinResultList] = useState<TSpinResult[]>([]);
+  const [nextPrizeTitle, setNextPrizeTitle] = useState<string>("");
 
-    const resultIndex = allPrizes.findIndex(
-      (prize) => randomNumber <= prize.percentage / 100
-    );
-
-    if (resultIndex !== -1 && allPrizes[resultIndex].count > 0) {
-      const result = allPrizes[resultIndex];
-      setPrizeWon(result.title);
-      setAllPrizes((prev) => {
-        const updatedPrizes = [...prev];
-        updatedPrizes[resultIndex] = {
-          ...result,
-          count: result.count - 1,
-        };
-        return updatedPrizes;
-      });
-
-      return;
-    } else {
-      setPrizeWon("No prize won");
-    }
+  const getPrizeLeftString = () => {
+    const prizeLeft: number[] = [];
+    allPrizes.forEach((prize, idx) => {
+      prizeLeft.push(...Array(prize.count).fill(` ${idx + 1} `));
+    });
+    return `[${prizeLeft.toString()}]`;
   };
 
+  const handleSpinStart = () => {
+    const randomResult = Math.random();
+
+    let accumulatedPercentage = 0;
+    let nextPrizeTitle = "";
+
+    for (const prize of allPrizes) {
+      accumulatedPercentage += prize.percentage / 100;
+
+      if (randomResult <= accumulatedPercentage) {
+        if (prize.count > 0) {
+          nextPrizeTitle = prize.title;
+          setNextPrizeTitle(nextPrizeTitle);
+          // Create a copy of the allPrizes array
+          const updatedPrizes = [...allPrizes];
+          const wonPrizeIndex = updatedPrizes.findIndex(
+            (p) => p.title === nextPrizeTitle
+          );
+
+          updatedPrizes[wonPrizeIndex].count--;
+          setAllPrizes(updatedPrizes);
+        }
+
+        break;
+      }
+
+      setNextPrizeTitle("");
+    }
+    return nextPrizeTitle;
+  };
+
+  const handleSpinEnd = () => {
+    const message = nextPrizeTitle
+      ? "恭喜抽到「" + nextPrizeTitle + "」！"
+      : "真是可惜，沒有中獎！";
+
+    setSpinResultList((prev) => [
+      ...prev,
+      {
+        spinResultMessage: message,
+        priceLeftString: `目前剩餘獎項  ${getPrizeLeftString()}`,
+      },
+    ]);
+  };
+
+  const totalPrizes = useMemo(() => getPrizeLeftString(), []);
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-2 w-10/12 gap-12 m-auto">
       <SpinningWheel
         prizes={allPrizes}
-        onSpinEnd={() => {
-          handlePlay();
-          console.log(prizeWon);
-        }}
+        spinDurationMs={2000}
+        onSpinStart={handleSpinStart}
         size="300px"
+        onSpinEnd={handleSpinEnd}
       />
+      <Q2PrizeInfo spinResultList={spinResultList} totalPrizes={totalPrizes} />
     </div>
   );
 };
