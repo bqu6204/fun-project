@@ -12,11 +12,11 @@ type TPrize = {
 const Q2Content: React.FC = () => {
   const [allPrizes, setAllPrizes] = useState<TPrize[]>(
     [
-      { title: "頭獎", percentage: 0.1, backgroundColor: "#138", count: 1 },
-      { title: "貳等獎", percentage: 3, backgroundColor: "#981", count: 1 },
-      { title: "參等獎", percentage: 13, backgroundColor: "#862", count: 3 },
-      { title: "肆等獎", percentage: 18, backgroundColor: "#911", count: 5 },
-      { title: "伍等獎", percentage: 25, backgroundColor: "#191", count: 9 },
+      { title: "頭獎", percentage: 0.1, count: 1, backgroundColor: "#138" },
+      { title: "貳等獎", percentage: 3, count: 1, backgroundColor: "#981" },
+      { title: "參等獎", percentage: 13, count: 3, backgroundColor: "#862" },
+      { title: "肆等獎", percentage: 18, count: 5, backgroundColor: "#911" },
+      { title: "伍等獎", percentage: 25, count: 9, backgroundColor: "#191" },
     ].sort((a, b) => a.percentage - b.percentage)
   );
 
@@ -43,7 +43,6 @@ const Q2Content: React.FC = () => {
       if (randomResult <= accumulatedPercentage) {
         if (prize.count > 0) {
           nextPrizeTitle = prize.title;
-          setNextPrizeTitle(nextPrizeTitle);
           // Create a copy of the allPrizes array
           const updatedPrizes = [...allPrizes];
           const wonPrizeIndex = updatedPrizes.findIndex(
@@ -56,9 +55,9 @@ const Q2Content: React.FC = () => {
 
         break;
       }
-
-      setNextPrizeTitle("");
     }
+    setNextPrizeTitle(nextPrizeTitle);
+
     return nextPrizeTitle;
   };
 
