@@ -7,12 +7,14 @@ import YoubikePagination from "@/components/pagination/youbike-pagination";
 interface ISection2Result {
   dataList: IYoubikeData[];
   isFiltering: boolean;
+  isFetching: boolean;
   className: string;
 }
 
 const Section2Result: React.FC<ISection2Result> = ({
   dataList,
   isFiltering,
+  isFetching,
   className,
 }) => {
   const { currentCounty } = useYoubikeSelector((state) => state.youbikeFilter);
@@ -55,6 +57,8 @@ const Section2Result: React.FC<ISection2Result> = ({
     })
     .slice(startIndex, endIndex);
 
+  console.log(sortedAndSlicedData);
+
   return (
     <div className={`${styleSheet.container} ${className}`}>
       <table className={styleSheet.table}>
@@ -71,23 +75,39 @@ const Section2Result: React.FC<ISection2Result> = ({
         <tbody
           className={`${styleSheet.tbody} ${
             isFiltering && dataList.length !== 0 ? styleSheet.isFiltering : ""
+          } ${sortedAndSlicedData.length === 0 ? styleSheet.isEmpty : ""} ${
+            isFetching ? styleSheet.isFetching : ""
           }`}
         >
-          {sortedAndSlicedData.map((data) => {
-            return (
-              <tr key={data.sno}>
-                <td>{currentCounty}</td>
-                <td>{data.sarea}</td>
-                <td>{data.sna.substring(data.sna.indexOf("_") + 1)}</td>
-                <td>{data.sbi}</td>
-                <td>{data.bemp}</td>
-              </tr>
-            );
-          })}
+          {sortedAndSlicedData.length !== 0
+            ? sortedAndSlicedData.map((data) => {
+                return (
+                  <tr key={data.sno}>
+                    <td>{currentCounty}</td>
+                    <td>{data.sarea}</td>
+                    <td>{data.sna.substring(data.sna.indexOf("_") + 1)}</td>
+                    <td>{data.sbi}</td>
+                    <td>{data.bemp}</td>
+                  </tr>
+                );
+              })
+            : Array(itemsPerPage)
+                .fill("0")
+                .map(() => {
+                  return (
+                    <tr className={styleSheet.noItemTr}>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  );
+                })}
         </tbody>
       </table>
 
-      <div className="flex gap-8 justify-center mt-4 items-center">
+      <div className="flex gap-8 justify-center pt-8 pb-12 items-center">
         <YoubikePagination
           currentPage={currentPage}
           onPageChange={handlePageChange}

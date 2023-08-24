@@ -12,10 +12,15 @@ const YoubikePagination: React.FC<IYoubikePagination> = ({
   onPageChange,
 }) => {
   const handlePageChange = (page: number) => {
+    if (totalPages === 0) onPageChange(1);
+    if (currentPage > totalPages) onPageChange(totalPages);
     if (page >= 1 && page <= totalPages) {
       onPageChange(page);
     }
   };
+
+  if (currentPage > totalPages) handlePageChange(totalPages);
+
   return (
     <div className={styleSheet.container}>
       <button

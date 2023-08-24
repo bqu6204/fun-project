@@ -103,7 +103,7 @@
 
     &::after{
         position: absolute;
-        content:'更新中......';
+
         display: flex;
         align-items: center;
         justify-content: center;
@@ -120,6 +120,21 @@
 
 
     &.isFiltering::after{
+        content:'更新中......';
+        opacity: 1;   
+        color:var.$YOUBIKE_DARK_GREEN;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    &.isEmpty::after{
+        content:'查無資料。';
+        opacity: 1;   
+        color:var.$YOUBIKE_DARK_GREEN;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    &.isFetching::after{
+        content:'資料抓取中......';
         opacity: 1;   
         color:var.$YOUBIKE_DARK_GREEN;
         background-color: rgba(255, 255, 255, 0.9);
@@ -131,6 +146,7 @@
     tr:nth-child(even){
         background-color: var.$YOUBIKE_LIGHT_GRAY;
     }
+
     tr{
         height: 80px;
         user-select: text;

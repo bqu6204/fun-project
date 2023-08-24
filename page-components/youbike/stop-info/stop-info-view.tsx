@@ -74,6 +74,7 @@ const StopInfoView: React.FC<IStopInfoView> = () => {
       <Section2Result
         className="my-4"
         isFiltering={isPending}
+        isFetching={isFetching}
         dataList={filterdDataList !== null ? filterdDataList : dataList}
       />
     </div>
