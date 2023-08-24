@@ -57,8 +57,6 @@ const Section2Result: React.FC<ISection2Result> = ({
     })
     .slice(startIndex, endIndex);
 
-  console.log(sortedAndSlicedData);
-
   return (
     <div className={`${styleSheet.container} ${className}`}>
       <table className={styleSheet.table}>
@@ -93,9 +91,9 @@ const Section2Result: React.FC<ISection2Result> = ({
               })
             : Array(itemsPerPage)
                 .fill("0")
-                .map(() => {
+                .map((elm, idx) => {
                   return (
-                    <tr className={styleSheet.noItemTr}>
+                    <tr key={idx} className={styleSheet.noItemTr}>
                       <td></td>
                       <td></td>
                       <td></td>
