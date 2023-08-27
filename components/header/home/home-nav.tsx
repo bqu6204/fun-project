@@ -3,8 +3,10 @@ const HomeNav: React.FC = () => {
     <div className="lg:flex items-center justify-between lg:px-24 lg:pb-24 pt-24 ">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex ">
         <p className="fixed z-10 bg-gray-200 bg-opacity-30 left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-3xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Turtle Mobile
-          <code className="font-mono font-bold">&nbsp;interview questions</code>
+          A Collection Of
+          <code className="font-mono font-bold">
+            &nbsp;interesting questions
+          </code>
         </p>
       </div>
 
